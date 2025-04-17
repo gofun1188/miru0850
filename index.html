@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JC钜城 - 埃及主题游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #000;
+            min-height: 100vh;
+        }
+        
+        /* 满版Logo背景栏 - 固定在顶部 */
+        .logo-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #000;
+            padding: 15px 0;
+            z-index: 100;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.7);
+            border-bottom: 2px solid #333;
+        }
+        
+        .logo {
+            max-width: 180px;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+            animation: logoGlow 3s infinite alternate;
+        }
+        
+        @keyframes logoGlow {
+            0% {
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+            }
+            100% {
+                filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+            }
+        }
+        
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 70px; /* 为固定的logo腾出空间 */
+        }
+        
+        .main-image-container {
+            width: 100%;
+            text-align: center;
+            margin: 10px 0 20px 0;
+        }
+        
+        .main-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            display: block;
+        }
+        
+        .game-info {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .game-title {
+            font-size: 0;
+            visibility: hidden;
+        }
+        
+        .game-description {
+            font-size: 0;
+            visibility: hidden;
+        }
+        
+        /* 优势特点列表 */
+        .features-list {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-top: 2px solid #B8860B;
+            border-bottom: 2px solid #B8860B;
+        }
+        
+        .features-list ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .features-list li {
+            font-size: 16px;
+            padding: 5px 10px;
+            background: linear-gradient(to right, #111111, #222222);
+            border-radius: 5px;
+            border-left: 3px solid #FFD700;
+            color: #FFD700;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+        
+        /* 联系方式和促销信息 */
+        .promo-info {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 12px;
+            margin-bottom: 10px;
+            border-top: 1px solid #B8860B;
+            font-size: 15px;
+            color: #FFD700;
+        }
+        
+        .contact-info {
+            padding: 5px 0;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .cta-button {
+            width: 100%;
+            background: linear-gradient(to right, #B8860B, #FFD700, #B8860B);
+            color: #000;
+            font-weight: bold;
+            font-size: 26px;
+            text-decoration: none;
+            padding: 28px 0;
+            border-radius: 0;
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+            border: 4px solid #8B4513;
+            border-left: 0;
+            border-right: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+            margin-bottom: 20px;
+        }
+        
+        .cta-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            transition: 0.6s;
+        }
+        
+        /* 添加埃及风格装饰元素 */
+        .btn-decoration-left {
+            content: "⥼";
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            color: #8B4513;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+        }
+        
+        .btn-decoration-right {
+            content: "⥽";
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            color: #8B4513;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.9), 0 0 50px rgba(255, 165, 0, 0.6);
+            background: linear-gradient(to right, #FFC107, #FFD700, #FFC107);
+            border-color: #DAA520;
+            color: #8B0000;
+        }
+        
+        /* 移动设备适配 */
+        @media (max-width: 480px) {
+            .cta-button {
+                font-size: 22px;
+                padding: 22px 0;
+            }
+            
+            .btn-decoration-left {
+                left: 15px;
+                font-size: 24px;
+            }
+            
+            .btn-decoration-right {
+                right: 15px;
+                font-size: 24px;
+            }
+            
+            .logo {
+                max-width: 150px;
+            }
+            
+            .logo-bar {
+                padding: 12px 0;
+            }
+            
+            .content {
+                padding-top: 60px;
+            }
+            
+            .features-list li {
+                font-size: 14px;
+                padding: 4px 8px;
+            }
+            
+            .promo-info {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部LOGO栏，改为固定定位 -->
+        <div class="logo-bar">
+            <img src="images/logo2.webp" alt="JC钜城" class="logo">
+        </div>
+        
+        <div class="content">
+            <!-- 主图片显示 -->
+            <div class="main-image-container">
+                <img src="images/未命名設1.jpg" alt="埃及主题游戏" class="main-image">
+            </div>
+            
+            <div class="game-info">
+                <h1 class="game-title">埃及战神赛特 - 传奇游戏</h1>
+                <p class="game-description">踏入古埃及神话世界，与神灵共舞！</p>
+                
+                <!-- 优势特点列表 -->
+                <div class="features-list">
+                    <ul>
+                        <li>沒IP限制</li>
+                        <li>不用綁戶頭</li>
+                        <li>不用實名</li>
+                        <li>一鍵註冊即玩</li>
+                        <li>秒存秒提</li>
+                        <li>金額無上限</li>
+                    </ul>
+                </div>
+                
+                <!-- 促销和联系信息 -->
+                <div class="promo-info">
+                    <p>首儲請私訊 新會員 送一周總儲值金額 20%</p>
+                    <p>VIP反水最高1.2% 公開透明 自動升級</p>
+                    <div class="contact-info">
+                        <p>LINE：miru0850</p>
+                        <p>海川版主飛機號 @Gofun1788</p>
+                        <p>飛機一鍵註冊請加 @Gofunxx_bot</p>
+                        <p>海川遊戲頻道 t.me/miru1788</p>
+                    </div>
+                </div>
+                
+                <a href="https://t.me/miru0850" class="cta-button">
+                    <span class="btn-decoration-left">⥼</span>
+                    點擊立即 領取專屬好禮！
+                    <span class="btn-decoration-right">⥽</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
