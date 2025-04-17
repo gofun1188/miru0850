@@ -135,6 +135,29 @@
             color: #fff;
         }
         
+        .contact-info a {
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 5px 0;
+            background: linear-gradient(to right, #111111, #222222);
+            border-radius: 5px;
+            border-left: 3px solid #FFD700;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-info a:hover {
+            background: linear-gradient(to right, #222222, #333333);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+        }
+        
+        .contact-icon {
+            margin-right: 5px;
+            color: #FFD700;
+        }
+        
         .cta-button {
             width: 100%;
             background: linear-gradient(to right, #B8860B, #FFD700, #B8860B);
@@ -204,6 +227,36 @@
             color: #8B0000;
         }
         
+        /* 增加社交图标样式 */
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        
+        .social-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #FFD700;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid #444;
+        }
+        
+        .social-button:hover {
+            background-color: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+            border-color: #FFD700;
+        }
+        
         /* 移动设备适配 */
         @media (max-width: 480px) {
             .cta-button {
@@ -242,6 +295,12 @@
                 font-size: 14px;
                 padding: 10px;
             }
+            
+            .social-button {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -278,11 +337,20 @@
                 <div class="promo-info">
                     <p>首儲請私訊 新會員 送一周總儲值金額 20%</p>
                     <p>VIP反水最高1.2% 公開透明 自動升級</p>
+                    
                     <div class="contact-info">
-                        <p>LINE：miru0850</p>
-                        <p>海川版主飛機號 @Gofun1788</p>
-                        <p>飛機一鍵註冊請加 @Gofunxx_bot</p>
-                        <p>海川遊戲頻道 t.me/miru1788</p>
+                        <a href="https://line.me/ti/p/miru0850">
+                            <span class="contact-icon">✉</span> LINE：miru0850
+                        </a>
+                        <a href="https://t.me/Gofun1788">
+                            <span class="contact-icon">✈</span> 海川版主飛機號 @Gofun1788
+                        </a>
+                        <a href="https://t.me/Gofunxx_bot">
+                            <span class="contact-icon">☑</span> 飛機一鍵註冊請加 @Gofunxx_bot
+                        </a>
+                        <a href="https://t.me/miru1788">
+                            <span class="contact-icon">📱</span> 海川遊戲頻道 t.me/miru1788
+                        </a>
                     </div>
                 </div>
                 
