@@ -1,365 +1,227 @@
 <!DOCTYPE html>
-<html lang="zh">
-<head>
-
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '488931467548136');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=488931467548136&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-    
+<html lang="zh-TW">
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>海川版主</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Microsoft YaHei', sans-serif;
-        }
-        
-        body {
-            background-color: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #000;
-            min-height: 100vh;
-            padding-top: 65px; /* 为顶部LOGO留出空间 */
-        }
-        
-        /* 满版Logo背景栏 - 固定在顶部 */
-        .logo-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            padding: 10px 0;
-            z-index: 100;
-            text-align: center;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.7);
-            border-bottom: 2px solid #333;
-            height: 65px; /* 固定高度 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .logo {
-            max-width: 150px;
-            height: auto;
-            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
-            animation: logoGlow 3s infinite alternate;
-        }
-        
-        @keyframes logoGlow {
-            0% {
-                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
-            }
-            100% {
-                filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
-            }
-        }
-        
-        .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .main-image-container {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .main-image {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-            display: block;
-        }
-        
-        .game-info {
-            width: 100%;
-            text-align: center;
-        }
-        
-        .game-title {
-            font-size: 0;
-            visibility: hidden;
-        }
-        
-        .game-description {
-            font-size: 0;
-            visibility: hidden;
-        }
-        
-        /* 优势特点列表 */
-        .features-list {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            margin-bottom: 10px;
-            border-top: 2px solid #B8860B;
-            border-bottom: 2px solid #B8860B;
-        }
-        
-        .features-list ul {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .features-list li {
-            font-size: 16px;
-            padding: 5px 10px;
-            background: linear-gradient(to right, #111111, #222222);
-            border-radius: 5px;
-            border-left: 3px solid #FFD700;
-            color: #FFD700;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-        }
-        
-        /* 联系方式和促销信息 */
-        .promo-info {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 12px;
-            margin-bottom: 10px;
-            border-top: 1px solid #B8860B;
-            font-size: 15px;
-            color: #FFD700;
-        }
-        
-        .contact-info {
-            padding: 5px 0;
-            font-weight: bold;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .contact-info a {
-            color: #fff;
-            text-decoration: none;
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            padding: 8px 15px;
-            background: linear-gradient(to right, #111111, #222222);
-            border-radius: 5px;
-            border-left: 3px solid #FFD700;
-            transition: all 0.3s ease;
-            text-align: left;
-        }
-        
-        .contact-info a:hover {
-            background: linear-gradient(to right, #222222, #333333);
-            transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
-        }
-        
-        .contact-icon {
-            margin-right: 5px;
-            color: #FFD700;
-        }
-        
-        .cta-button {
-            width: 100%;
-            background: linear-gradient(to right, #B8860B, #FFD700, #B8860B);
-            color: #000;
-            font-weight: bold;
-            font-size: 26px;
-            text-decoration: none;
-            padding: 28px 0;
-            border-radius: 0;
-            display: block;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
-            position: relative;
-            overflow: hidden;
-            border: 4px solid #8B4513;
-            border-left: 0;
-            border-right: 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
-            margin-bottom: 20px;
-        }
-        
-        .cta-button::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-            transition: 0.6s;
-        }
-        
-        /* 添加埃及风格装饰元素 */
-        .btn-decoration-left {
-            content: "⥼";
-            position: absolute;
-            left: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 30px;
-            color: #8B4513;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
-        }
-        
-        .btn-decoration-right {
-            content: "⥽";
-            position: absolute;
-            right: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 30px;
-            color: #8B4513;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
-        }
-        
-        .cta-button:hover::before {
-            left: 100%;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.9), 0 0 50px rgba(255, 165, 0, 0.6);
-            background: linear-gradient(to right, #FFC107, #FFD700, #FFC107);
-            border-color: #DAA520;
-            color: #8B0000;
-        }
-        
-        /* 移动设备适配 */
-        @media (max-width: 480px) {
-            .container {
-                padding-top: 55px;
-            }
-            
-            .logo-bar {
-                height: 55px;
-                padding: 8px 0;
-            }
-            
-            .logo {
-                max-width: 120px;
-            }
-            
-            .cta-button {
-                font-size: 22px;
-                padding: 22px 0;
-            }
-            
-            .btn-decoration-left {
-                left: 15px;
-                font-size: 24px;
-            }
-            
-            .btn-decoration-right {
-                right: 15px;
-                font-size: 24px;
-            }
-            
-            .features-list li {
-                font-size: 14px;
-                padding: 4px 8px;
-            }
-            
-            .promo-info {
-                font-size: 14px;
-                padding: 10px;
-            }
-            
-            .contact-info a {
-                padding: 6px 10px;
-                font-size: 14px;
-            }
-        }
-    </style>
-</head>
-<body>
+    <title>GoFun - 全球華人首選 線上娛樂城</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
     <div class="container">
-        <!-- 顶部LOGO栏，固定高度 -->
-        <div class="logo-bar">
-            <img src="images/logo2.webp" alt="海川版主" class="logo">
+      <div class="particles" id="particles">
+
+      </div>
+
+      <div class="grid-background"></div>
+
+      <header class="header">
+        <img src="images/logo.png" alt="GoFun" class="header-logo">
+      </header>
+
+      <section class="hero-section">
+        <h1 class="hero-title">全球華人首選 線上娛樂城</h1>
+        <p class="hero-subtitle">體驗未來感娛樂平台，打造您的專屬數位遊戲體驗</p>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">柯基介紹</h2>
         </div>
-        
-        <div class="content">
-            <!-- 主图片显示 -->
-            <div class="main-image-container">
-                <img src="images/未命名設1.jpg" alt="埃及主题游戏" class="main-image">
-            </div>
-            
-            <div class="game-info">
-                <h1 class="game-title">埃及战神赛特 - 传奇游戏</h1>
-                <p class="game-description">踏入古埃及神话世界，与神灵共舞！</p>
-                
-                <!-- 优势特点列表 -->
-                <div class="features-list">
-                    <ul>
-                        <li>沒IP限制</li>
-                        <li>不用綁戶頭</li>
-                        <li>不用實名</li>
-                        <li>一鍵註冊即玩</li>
-                        <li>秒存秒提</li>
-                        <li>金額無上限</li>
-                    </ul>
-                </div>
-                
-                <!-- 促销和联系信息 -->
-                <div class="promo-info">
-                    <p>首儲請私訊 新會員 送一周總儲值金額 20%</p>
-                    <p>VIP反水最高1.2% 公開透明 自動升級</p>
-                    
-                    <div class="contact-info">
-                        <a href="https://line.me/ti/p/3GZRYvdqaA">
-                            <span class="contact-icon">✉</span> LINE：miru0850
-                        </a>
-                        <a href="https://t.me/Gofun1788">
-                            <span class="contact-icon">✈</span> 海川版主飛機號 @Gofun1788
-                        </a>
-                        <a href="https://t.me/Gofunxx_bot">
-                            <span class="contact-icon">☑</span> 飛機一鍵註冊請加 @Gofunxx_bot
-                        </a>
-                        <a href="https://t.me/miru1788">
-                            <span class="contact-icon">📱</span> 海川遊戲頻道 t.me/miru1788
-                        </a>
-                    </div>
-                </div>
-                
-                <a href="https://t.me/Gofun1788" class="cta-button">
-                    <span class="btn-decoration-left">⥼</span>
-                    點擊立即 領取專屬好禮！
-                    <span class="btn-decoration-right">⥽</span>
-                </a>
-            </div>
+        <div class="section-content">
+          <div class="video-container">
+            <iframe
+              width="100%"
+              height="315"
+              src="https://www.youtube.com/embed/sw8QW-IgJmI?playlist=sw8QW-IgJmI&autoplay=1&mute=1&loop=1&controls=1&rel=0"
+              title="平台介紹"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
         </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h3 class="section-title">每周3天YT直播 帶你電子不採雷</h3>
+        </div>
+
+        <div class="section-content" style="padding-top: 15px; text-align: center;">
+          <div class="video-container">
+            <iframe
+              width="100%"
+              height="315"
+              src="https://www.youtube.com/embed/Jt7f18VKnzk?autoplay=1&mute=1&loop=1&playlist=Jt7f18VKnzk&controls=1&rel=0"
+              title="海川遊戲實況"
+              frameborder="0"
+              allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              playsinline>
+            </iframe>
+          </div>
+
+          <p style="margin-top: 15px; font-weight: 600; color: #00e2ff; font-size: 1.1rem;">訂閱YOUTUBE ↓</p>
+          <a href="https://www.youtube.com/@cgsd17888">
+            <img src="images/yt按鈕.png" alt="訂閱YT頻道" style="margin-top: 8px; display: block; margin-left: auto; margin-right: auto; width: 150px; height: auto;">
+          </a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h3 class="section-title">百萬台幣大獎等你來領</h3>
+        </div>
+
+        <div class="section-content" style="padding-top: 15px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="video-container">
+              <iframe
+                width="100%"
+                height="315"
+                src="https://www.youtube.com/embed/msoCZyxzJf4?playlist=msoCZyxzJf4&autoplay=1&mute=1&loop=1&controls=1&rel=0"
+                title="雷神"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+
+            <div class="video-container">
+              <iframe
+                width="100%"
+                height="315"
+                src="https://www.youtube.com/embed/LCGlUHNmI6g?playlist=LCGlUHNmI6g&autoplay=1&mute=1&loop=1&controls=1&rel=0"
+                title="幸運必"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <div class="icon-buttons">
+        <a href="https://t.me/miru1788" class="icon-btn tg-icon">
+          <div class="icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.5 2l-19.5 9.5 7 2 10.5-9.5-8 11 4 2 6-15.5z"/>
+            </svg>
+          </div>
+        </a>
+
+        <a href="https://www.youtube.com/@cgsd17888" class="icon-btn yt-icon">
+          <div class="icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+            </svg>
+          </div>
+        </a>
+
+        <a href="https://line.me/ti/p/3GZRYvdqaA" class="icon-btn line-icon">
+          <div class="icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+
+      <a href="javascript:void(0);" class="fixed-mascot" id="mascotButton">
+        <img src="images/右下角固定tg.png" alt="吉祥物" style="width: 180px; height: auto;">
+      </a>
+
+
+      <div id="contactModal" class="contact-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-logo-container">
+              <img src="images/logo.png" alt="GoFun Logo" class="modal-logo">
+            </div>
+            <span class="close-modal">&times;</span>
+          </div>
+          <div class="modal-body">
+            <h2 class="modal-title">聯絡海川 <span class="highlight-text">24/7 隨時為您服務</span></h2>
+
+            <div class="register-banner">
+              <div class="register-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div class="register-text">
+                <h3>註冊GoFun</h3>
+                <p>註冊後聯繫海川 享受獨家優惠</p>
+              </div>
+              <a href="https://97y.me/foRHM" class="register-button">立即註冊</a>
+            </div>
+
+            <div class="contact-options">
+              <div class="contact-option telegram-option" data-link="https://t.me/miru1788">
+                <div class="contact-icon-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2l-19.5 9.5 7 2 10.5-9.5-8 11 4 2 6-15.5z"/>
+                  </svg>
+                </div>
+                <div class="contact-info-text">
+                  <h3>Telegram</h3>
+                  <p>24小時-海川專線</p>
+                </div>
+              </div>
+
+              <div class="contact-option youtube-option" data-link="https://www.youtube.com/@cgsd17888">
+                <div class="contact-icon-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                  </svg>
+                </div>
+                <div class="contact-info-text">
+                  <h3>YouTube</h3>
+                  <p>訂閱實況教學頻道</p>
+                </div>
+              </div>
+
+              <div class="contact-option line-option" data-link="https://line.me/ti/p/3GZRYvdqaA">
+                <div class="contact-icon-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                </div>
+                <div class="contact-info-text">
+                  <h3>Line</h3>
+                  <p>加入官方Line好友</p>
+                </div>
+              </div>
+
+              <div class="contact-option telegram-game-option" data-link="https://t.me/miru1788">
+                <div class="contact-icon-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.5 2l-19.5 9.5 7 2 10.5-9.5-8 11 4 2 6-15.5z"/>
+                  </svg>
+                  <span class="game-badge">遊戲</span>
+                </div>
+                <div class="contact-info-text">
+                  <h3>TG遊戲頻道</h3>
+                  <p>最新遊戲資訊與活動</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+
+    <script src="scripts.js"></script>
+  </body>
 </html>
