@@ -495,23 +495,22 @@ a {
   fill: none;
 }
 
-/* 固定在右下角的吉祥物圖片按鈕 */
+/* 固定在右下角的吉祥物圖片按鈕 - 修改版本 */
 .fixed-mascot {
-  position: fixed;
-  bottom: 35px;
-  right: 20px;
+  position: fixed !important; /* 強制使用固定定位 */
+  bottom: 20px !important; /* 強制底部位置 */
+  right: 15px !important; /* 強制右側位置 */
+  left: auto !important; /* 確保不受左側定位影響 */
+  top: auto !important; /* 確保不受頂部定位影響 */
   z-index: 1000;
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
-  cursor: pointer;
-  animation: mascotIdle 12s ease-in-out infinite;
-  transform-origin: bottom right;
+  width: 120px; /* 縮小寬度 */
+  height: auto;
+  transform-origin: bottom right !important; /* 確保變形原點在右下角 */
 }
 
-.fixed-mascot:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 20px rgba(76, 0, 255, 0.8));
-  animation: swing 1s infinite alternate ease-in-out;
+.fixed-mascot img {
+  width: 100%;
+  height: auto;
 }
 
 /* 聯絡模態框樣式 */
@@ -975,7 +974,174 @@ a {
   opacity: 0;
 }
 
-/* 動畫定義 */
+/* 新增修改過的卡片按鈕樣式 */
+.card-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0 80px 15px; /* 底部增加更多間距，為固定TG圖片留出空間，左對齊 */
+  max-width: 50%; /* 寬度設為一半 */
+  padding: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.card-btn {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px; /* 減小內邊距 */
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+.card-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+.card-icon-wrapper {
+  width: 28px; /* 更小的圖標容器 */
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.card-icon-wrapper svg {
+  width: 16px; /* 更小的圖標 */
+  height: 16px;
+  stroke: #fff;
+  fill: none;
+}
+
+.card-text {
+  flex: 1;
+}
+
+.card-text h3 {
+  font-size: 0.95rem; /* 更小的標題文字 */
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 2px 0;
+}
+
+.card-text p {
+  font-size: 0.75rem; /* 更小的描述文字 */
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+/* 按鈕顏色樣式 */
+.youtube-card {
+  background: linear-gradient(135deg, #c00, #ff3333);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.youtube-card .card-icon-wrapper {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.line-card {
+  background: linear-gradient(135deg, #06c755, #07e060);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.line-card .card-icon-wrapper {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.telegram-card {
+  background: linear-gradient(135deg, #0088cc, #18a2e5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.telegram-card .card-icon-wrapper {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* 動畫效果 */
+.card-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.card-btn:hover::before {
+  transform: translateX(100%);
+}
+
+/* 新增修正的動畫 */
+@keyframes mascotIdleFixed {
+  0%, 20%, 50%, 80%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+  }
+  5% {
+    transform: scale(1.05) rotate(3deg);
+    filter: drop-shadow(0 0 15px rgba(76, 0, 255, 0.7));
+  }
+  25% {
+    transform: scale(1.03) rotate(-2deg);
+    filter: drop-shadow(0 0 12px rgba(0, 230, 255, 0.6));
+  }
+  55% {
+    transform: scale(1.08) rotate(2deg);
+    filter: drop-shadow(0 0 20px rgba(0, 230, 255, 0.8));
+  }
+  85% {
+    transform: scale(1.04) rotate(-3deg);
+    filter: drop-shadow(0 0 15px rgba(76, 0, 255, 0.6));
+  }
+}
+
+@keyframes mascotBounceFixed {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+  }
+  40% {
+    transform: translateY(-20px) scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(0, 230, 255, 0.8));
+  }
+  60% {
+    transform: translateY(-15px) scale(1.08);
+    filter: drop-shadow(0 0 18px rgba(76, 0, 255, 0.7));
+  }
+  80% {
+    transform: translateY(-5px) scale(1.05);
+    filter: drop-shadow(0 0 15px rgba(0, 230, 255, 0.6));
+  }
+}
+
+@keyframes mascotShakeFixed {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: rotate(-5deg) scale(1.05);
+    filter: drop-shadow(0 0 15px rgba(76, 0, 255, 0.6));
+  }
+  20%, 40%, 60%, 80% {
+    transform: rotate(5deg) scale(1.05);
+    filter: drop-shadow(0 0 15px rgba(0, 230, 255, 0.6));
+  }
+}
+
+/* 原有動畫定義 */
 @keyframes float {
   0% {
     transform: translateY(0) translateX(0);
@@ -1052,63 +1218,6 @@ a {
 @keyframes swing {
   0% { transform: rotate(-5deg) scale(1.1); }
   100% { transform: rotate(5deg) scale(1.1); }
-}
-
-@keyframes mascotIdle {
-  0%, 20%, 50%, 80%, 100% {
-    transform: scale(1) rotate(0deg) translateX(0);
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
-  }
-  5% {
-    transform: scale(1.05) rotate(3deg) translateX(0);
-    filter: drop-shadow(0 0 15px rgba(76, 0, 255, 0.7));
-  }
-  25% {
-    transform: scale(1.03) rotate(-2deg) translateX(0);
-    filter: drop-shadow(0 0 12px rgba(0, 230, 255, 0.6));
-  }
-  55% {
-    transform: scale(1.08) rotate(2deg) translateX(0);
-    filter: drop-shadow(0 0 20px rgba(0, 230, 255, 0.8));
-  }
-  85% {
-    transform: scale(1.04) rotate(-3deg) translateX(0); 
-    filter: drop-shadow(0 0 15px rgba(76, 0, 255, 0.6));
-  }
-}
-
-@keyframes mascotBounce {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
-  }
-  40% {
-    transform: translateY(-20px) scale(1.1);
-    filter: drop-shadow(0 0 20px rgba(0, 230, 255, 0.8));
-  }
-  60% {
-    transform: translateY(-15px) scale(1.08);
-    filter: drop-shadow(0 0 18px rgba(76, 0, 255, 0.7));
-  }
-  80% {
-    transform: translateY(-5px) scale(1.05);
-    filter: drop-shadow(0 0 15px rgba(0, 230, 255, 0.6));
-  }
-}
-
-@keyframes mascotShake {
-  0%, 100% {
-    transform: rotate(0deg) scale(1);
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
-  }
-  10%, 30%, 50%, 70%, 90% {
-    transform: rotate(-5deg) scale(1.05);
-    filter: drop-shadow(0 0 15px rgba(76, 0, 255, 0.6));
-  }
-  20%, 40%, 60%, 80% {
-    transform: rotate(5deg) scale(1.05);
-    filter: drop-shadow(0 0 15px rgba(0, 230, 255, 0.6));
-  }
 }
 
 /* 顯示模態框特效 */
@@ -1240,10 +1349,6 @@ a {
     font-size: 1.1rem;
   }
 
-  .fixed-mascot img {
-    width: 150px;
-  }
-
   .register-banner {
     flex-direction: column;
     text-align: center;
@@ -1310,8 +1415,29 @@ a {
     width: 18px;
     height: 18px;
   }
+}
 
-  .fixed-mascot img {
-    width: 120px;
-  }
+
+.telegram-game-option, 
+a[href*="miru1788"], 
+a[data-link*="miru1788"] {
+  order: 1 !important;
+}
+
+.telegram-option, 
+a[href*="Gofun1788"], 
+a[data-link*="Gofun1788"] {
+  order: 2 !important;
+}
+
+.youtube-option, 
+a[href*="youtube"], 
+a[data-link*="youtube"] {
+  order: 3 !important;
+}
+
+.line-option, 
+a[href*="line.me"], 
+a[data-link*="line.me"] {
+  order: 4 !important;
 }

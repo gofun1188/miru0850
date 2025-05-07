@@ -37,9 +37,17 @@ function initParticles() {
   }
 }
 
-// 吉祥物動畫初始化
+// 吉祥物動畫初始化 - 修改版本
 function initMascotAnimations() {
   const mascot = document.getElementById('mascotButton');
+  
+  // 確保初始位置（很重要）
+  mascot.style.position = 'fixed';
+  mascot.style.bottom = '20px';
+  mascot.style.right = '15px';
+  mascot.style.zIndex = '1000';
+  mascot.style.width = '150px';
+  mascot.style.height = 'auto';
 
   // 設置偶爾動畫的間隔（每5-15秒）
   function scheduleNextAnimation() {
@@ -55,8 +63,8 @@ function initMascotAnimations() {
     // 隨機觸發特殊動畫的機會
     if (Math.random() < 0.3) { // 30%的機會
       // 保存當前位置和樣式
-      const computedStyle = window.getComputedStyle(mascot);
-      const currentTransform = computedStyle.getPropertyValue('transform');
+      const currentRight = mascot.style.right;
+      const currentBottom = mascot.style.bottom;
       
       // 選擇一個隨機動畫
       const animationChoice = Math.floor(Math.random() * 3);
@@ -66,7 +74,7 @@ function initMascotAnimations() {
           // 彈跳動畫
           mascot.style.animation = 'none';
           void mascot.offsetWidth; // 強制重新計算
-          mascot.style.animation = 'mascotBounce 1s ease-in-out';
+          mascot.style.animation = 'mascotBounceFixed 1s ease-in-out';
           break;
         case 1:
           // 發光脈衝
@@ -76,46 +84,47 @@ function initMascotAnimations() {
           // 搖晃動畫
           mascot.style.animation = 'none';
           void mascot.offsetWidth; // 強制重新計算
-          mascot.style.animation = 'mascotShake 0.8s ease-in-out';
+          mascot.style.animation = 'mascotShakeFixed 0.8s ease-in-out';
           break;
       }
 
       // 特殊動畫後重設為閒置動畫
       setTimeout(() => {
-        // 保存當前計算樣式
-        const computedStyle = window.getComputedStyle(mascot);
-        const currentTransform = computedStyle.getPropertyValue('transform');
-        
         // 先停止動畫
         mascot.style.animation = 'none';
         
         // 強制重新計算
         void mascot.offsetWidth;
         
-        // 保持當前的transform狀態，然後應用新動畫
-        mascot.style.transform = currentTransform;
-        mascot.style.animation = 'mascotIdle 12s ease-in-out infinite';
+        // 恢復原來的位置
+        mascot.style.right = currentRight;
+        mascot.style.bottom = currentBottom;
+        
+        // 應用新動畫
+        mascot.style.animation = 'mascotIdleFixed 12s ease-in-out infinite';
       }, 1500);
     }
   }
 
   // 創建發光脈衝效果的函數
   function createGlowPulse() {
-  const glowOverlay = document.createElement('div');
-  glowOverlay.style.position = 'absolute'; // 使用絕對定位，相對於吉祥物
-  glowOverlay.style.top = '0';
-  glowOverlay.style.left = '0';
-  glowOverlay.style.width = '100%';
-  glowOverlay.style.height = '100%';
-  glowOverlay.style.borderRadius = '50%';
-  glowOverlay.style.boxShadow = '0 0 30px 10px rgba(0, 230, 255, 0.8)';
-  glowOverlay.style.opacity = '0';
-  glowOverlay.style.transition = 'opacity 1s ease-in-out';
-  glowOverlay.style.pointerEvents = 'none';
-  glowOverlay.style.zIndex = '1'; // 確保在吉祥物上方
+    const glowOverlay = document.createElement('div');
+    glowOverlay.style.position = 'absolute'; // 使用絕對定位，相對於吉祥物
+    glowOverlay.style.top = '0';
+    glowOverlay.style.left = '0';
+    glowOverlay.style.width = '100%';
+    glowOverlay.style.height = '100%';
+    glowOverlay.style.borderRadius = '50%';
+    glowOverlay.style.boxShadow = '0 0 30px 10px rgba(0, 230, 255, 0.8)';
+    glowOverlay.style.opacity = '0';
+    glowOverlay.style.transition = 'opacity 1s ease-in-out';
+    glowOverlay.style.pointerEvents = 'none';
+    glowOverlay.style.zIndex = '1'; // 確保在吉祥物上方
 
-    // 添加到吉祥物
-    mascot.style.position = 'relative';  // 確保相對定位以用於絕對定位
+    // 添加到吉祥物 - 關鍵修改：保持固定定位而不是改為相對定位
+    mascot.style.position = 'fixed';  // 確保仍然是固定定位
+    mascot.style.right = '15px';  // 確保位置
+    mascot.style.bottom = '20px'; // 確保位置
     mascot.appendChild(glowOverlay);
 
     // 動畫
@@ -137,6 +146,14 @@ function initMascotAnimations() {
 
   // 開始偶爾的動畫
   scheduleNextAnimation();
+  
+  // 監聽視窗大小變化，確保位置正確
+  window.addEventListener('resize', function() {
+    // 重置吉祥物位置
+    mascot.style.position = 'fixed';
+    mascot.style.bottom = '20px';
+    mascot.style.right = '15px';
+  });
 }
 
 // 初始化模態框處理
