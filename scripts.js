@@ -85,18 +85,18 @@ function initMascotAnimations() {
 
   // 創建發光脈衝效果的函數
   function createGlowPulse() {
-    // 創建發光覆蓋層
-    const glowOverlay = document.createElement('div');
-    glowOverlay.style.position = 'absolute';
-    glowOverlay.style.top = '0';
-    glowOverlay.style.left = '0';
-    glowOverlay.style.width = '100%';
-    glowOverlay.style.height = '100%';
-    glowOverlay.style.borderRadius = '50%';
-    glowOverlay.style.boxShadow = '0 0 30px 10px rgba(0, 230, 255, 0.8)';
-    glowOverlay.style.opacity = '0';
-    glowOverlay.style.transition = 'opacity 1s ease-in-out';
-    glowOverlay.style.pointerEvents = 'none';
+  const glowOverlay = document.createElement('div');
+  glowOverlay.style.position = 'absolute'; // 使用絕對定位，相對於吉祥物
+  glowOverlay.style.top = '0';
+  glowOverlay.style.left = '0';
+  glowOverlay.style.width = '100%';
+  glowOverlay.style.height = '100%';
+  glowOverlay.style.borderRadius = '50%';
+  glowOverlay.style.boxShadow = '0 0 30px 10px rgba(0, 230, 255, 0.8)';
+  glowOverlay.style.opacity = '0';
+  glowOverlay.style.transition = 'opacity 1s ease-in-out';
+  glowOverlay.style.pointerEvents = 'none';
+  glowOverlay.style.zIndex = '1'; // 確保在吉祥物上方
 
     // 添加到吉祥物
     mascot.style.position = 'relative';  // 確保相對定位以用於絕對定位

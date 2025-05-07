@@ -505,6 +505,7 @@ a {
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
   cursor: pointer;
   animation: mascotIdle 12s ease-in-out infinite;
+  transform-origin: center bottom;
 }
 
 .fixed-mascot:hover {
