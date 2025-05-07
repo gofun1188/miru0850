@@ -54,6 +54,10 @@ function initMascotAnimations() {
   function occasionalAnimation() {
     // 隨機觸發特殊動畫的機會
     if (Math.random() < 0.3) { // 30%的機會
+      // 保存當前位置和樣式
+      const computedStyle = window.getComputedStyle(mascot);
+      const currentTransform = computedStyle.getPropertyValue('transform');
+      
       // 選擇一個隨機動畫
       const animationChoice = Math.floor(Math.random() * 3);
 
@@ -78,6 +82,18 @@ function initMascotAnimations() {
 
       // 特殊動畫後重設為閒置動畫
       setTimeout(() => {
+        // 保存當前計算樣式
+        const computedStyle = window.getComputedStyle(mascot);
+        const currentTransform = computedStyle.getPropertyValue('transform');
+        
+        // 先停止動畫
+        mascot.style.animation = 'none';
+        
+        // 強制重新計算
+        void mascot.offsetWidth;
+        
+        // 保持當前的transform狀態，然後應用新動畫
+        mascot.style.transform = currentTransform;
         mascot.style.animation = 'mascotIdle 12s ease-in-out infinite';
       }, 1500);
     }
