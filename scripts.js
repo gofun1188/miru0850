@@ -156,7 +156,7 @@ function initMascotAnimations() {
   });
 }
 
-// 初始化模態框處理
+// 初始化模態框處理 - 修改為直接跳轉LINE
 function initModalHandlers() {
   const mascot = document.getElementById('mascotButton');
   const modal = document.getElementById('contactModal');
@@ -164,7 +164,7 @@ function initModalHandlers() {
   const contactOptions = document.querySelectorAll('.contact-option');
   const registerButton = document.querySelector('.register-button');
 
-  // 打開模態框
+  // 修改吉祥物點擊事件 - 直接跳轉到LINE
   mascot.addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -174,11 +174,13 @@ function initModalHandlers() {
     const explosionY = rect.top + rect.height / 2;
     createExplosion(explosionX, explosionY);
 
-    // 顯示模態框
-    setTimeout(openModal, 300);
+    // 延遲後直接跳轉到LINE
+    setTimeout(() => {
+      window.open('https://line.me/ti/p/3GZRYvdqaA', '_blank');
+    }, 300);
   });
 
-  // 強化模態框處理，修復移動端關閉問題
+  // 保留原有的模態框功能，以防需要其他地方調用
   function openModal() {
     modal.style.display = 'block';
     // 強制重繪以確保過渡效果生效
@@ -220,19 +222,23 @@ function initModalHandlers() {
   }
 
   // 關閉模態框 - 增強點擊處理
-  closeModal.addEventListener('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    closeModalFunc();
-  });
+  if (closeModal) {
+    closeModal.addEventListener('click', function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      closeModalFunc();
+    });
+  }
 
   // 點擊模態框外部區域關閉 - 優化移動裝置上的表現
-  modal.addEventListener('click', function(event) {
-    // 如果點擊的是模態框背景（不是內容）
-    if (event.target === modal) {
-      closeModalFunc();
-    }
-  });
+  if (modal) {
+    modal.addEventListener('click', function(event) {
+      // 如果點擊的是模態框背景（不是內容）
+      if (event.target === modal) {
+        closeModalFunc();
+      }
+    });
+  }
 
   // 聯絡選項點擊處理
   contactOptions.forEach(option => {
