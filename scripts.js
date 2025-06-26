@@ -176,7 +176,7 @@ function initModalHandlers() {
 
     // 延遲後直接跳轉到LINE
     setTimeout(() => {
-      window.open('https://line.me/R/ti/p/@699aemcp', '_blank');
+      window.open('https://97y.me/FrxEp', '_blank');
     }, 300);
   });
 
