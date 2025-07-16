@@ -235,7 +235,7 @@ src="https://www.facebook.com/tr?id=1078504810364452&ev=PageView&noscript=1"
     <div class="top-contact-bar">
       <div class="top-contact-content">
         <div class="top-contact-text">🎮 GoFun - 立即領取1288U首存優惠</div>
-        <a href="https://97y.me/FrxEp" class="top-contact-btn" id="topContactBtn">
+        <a href="javascript:void(0);" class="top-contact-btn" id="topContactBtn">
           快速注册
         </a>
       </div>
@@ -256,6 +256,44 @@ src="https://www.facebook.com/tr?id=1078504810364452&ev=PageView&noscript=1"
         <h1 class="hero-title">全球華人首選 線上娛樂城</h1>
         <p class="hero-subtitle">體驗未來感娛樂平台，打造您的專屬數位遊戲體驗</p>
       </section>
+
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">多元儲值通道 火速上分</h2>
+  </div>
+  <div class="section-content">
+    <div class="payment-methods-grid">
+      <div class="payment-method">
+        <img src="images/支付/USDT.webp" alt="USDT" class="payment-icon">
+        <span class="payment-label">USDT</span>
+      </div>
+      <div class="payment-method">
+        <img src="images/支付/轉數快_white.png" alt="港幣" class="payment-icon">
+        <span class="payment-label">轉數快</span>
+      </div>
+      <div class="payment-method">
+        <img src="images/支付/IMG_5434.PNG" alt="匯旺" class="payment-icon">
+        <span class="payment-label">匯旺</span>
+      </div>
+      <div class="payment-method">
+        <img src="images/支付/ABA.png" alt="ABA" class="payment-icon">
+        <span class="payment-label">ABA</span>
+      </div>
+      <div class="payment-method">
+        <img src="images/支付/信用卡.png" alt="全球信用卡" class="payment-icon">
+        <span class="payment-label">全球信用卡</span>
+      </div>
+      <div class="payment-method">
+        <img src="images/支付/applepay.png" alt="Apple Pay" class="payment-icon">
+        <span class="payment-label">Apple Pay</span>
+      </div>
+      <div class="payment-method">
+        <img src="images/支付/ebpay.png" alt="EBpay" class="payment-icon">
+        <span class="payment-label">EBpay</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="section">
   <div class="section-header">
@@ -504,6 +542,58 @@ src="https://www.facebook.com/tr?id=1078504810364452&ev=PageView&noscript=1"
     </div>
 
     <script>
+      // 地區檢測和鏈接分配
+      let regionLinks = {
+        china: 'https://97y.me/gJp5o',     // 柬埔寨/中國
+        other: 'https://97y.me/S6cLn'      // 其他地區
+      };
+
+      // 檢測用戶地區
+      async function detectUserRegion() {
+        try {
+          // 1. 首先檢查瀏覽器語言
+          const language = navigator.language || navigator.userLanguage;
+          if (language.includes('zh') || language.includes('km')) {
+            return 'china';
+          }
+
+          // 2. 使用免費IP地理位置服務
+          const response = await fetch('https://ipapi.co/json/', {
+            timeout: 3000
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            const country = data.country_code;
+            
+            // 檢查是否為中國或柬埔寨
+            if (country === 'CN' || country === 'KH') {
+              return 'china';
+            }
+          }
+        } catch (error) {
+          console.log('地區檢測失敗，使用語言判斷:', error);
+        }
+
+        // 3. 備用：檢查時區
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (timezone.includes('Shanghai') || timezone.includes('Beijing') || 
+            timezone.includes('Phnom_Penh') || timezone.includes('Asia/Shanghai')) {
+          return 'china';
+        }
+
+        // 4. 默認為其他地區
+        return 'other';
+      }
+
+      // 獲取對應地區的鏈接
+      function getRegionLink() {
+        return detectUserRegion().then(region => {
+          console.log('檢測到用戶地區:', region);
+          return regionLinks[region];
+        });
+      }
+
       // 半屏廣告檢測
       function detectHalfScreenAd() {
         // 檢測視窗高度，如果太小可能是半屏廣告
@@ -538,8 +628,29 @@ src="https://www.facebook.com/tr?id=1078504810364452&ev=PageView&noscript=1"
         const topContactBtn = document.getElementById('topContactBtn');
         if (topContactBtn) {
           topContactBtn.addEventListener('click', function(e) {
-            // 可以添加點擊追踪
+            e.preventDefault();
             console.log('頂部聯繫按鈕被點擊');
+            
+            // 獲取地區鏈接並跳轉
+            getRegionLink().then(link => {
+              window.open(link, '_blank');
+            });
+          });
+        }
+      }
+
+      // 設置右下角固定TG圖片點擊事件
+      function setupMascotButton() {
+        const mascotBtn = document.getElementById('mascotButton');
+        if (mascotBtn) {
+          mascotBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('右下角TG圖片被點擊');
+            
+            // 獲取地區鏈接並跳轉
+            getRegionLink().then(link => {
+              window.open(link, '_blank');
+            });
           });
         }
       }
@@ -547,7 +658,13 @@ src="https://www.facebook.com/tr?id=1078504810364452&ev=PageView&noscript=1"
       // 初始化所有功能
       document.addEventListener('DOMContentLoaded', function() {
         setupTopContactButton();
+        setupMascotButton();
         detectHalfScreenAd();
+        
+        // 預先檢測地區以提高響應速度
+        detectUserRegion().then(region => {
+          console.log('用戶地區已檢測:', region);
+        });
       });
 
       // 視窗大小改變時重新檢測
