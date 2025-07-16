@@ -551,38 +551,56 @@ src="https://www.facebook.com/tr?id=1078504810364452&ev=PageView&noscript=1"
       // 檢測用戶地區
       async function detectUserRegion() {
         try {
-          // 1. 首先檢查瀏覽器語言
-          const language = navigator.language || navigator.userLanguage;
-          if (language.includes('zh') || language.includes('km')) {
-            return 'china';
-          }
-
-          // 2. 使用免費IP地理位置服務
+          // 1. 優先使用IP地理位置服務檢測
           const response = await fetch('https://ipapi.co/json/', {
-            timeout: 3000
+            timeout: 5000
           });
           
           if (response.ok) {
             const data = await response.json();
             const country = data.country_code;
+            console.log('IP檢測到的國家:', country);
             
             // 檢查是否為中國或柬埔寨
             if (country === 'CN' || country === 'KH') {
               return 'china';
+            } else {
+              // IP檢測成功但不是中國/柬埔寨，直接返回其他地區
+              return 'other';
             }
           }
         } catch (error) {
-          console.log('地區檢測失敗，使用語言判斷:', error);
+          console.log('IP地理位置檢測失敗，嘗試其他方法:', error);
         }
 
-        // 3. 備用：檢查時區
-        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        if (timezone.includes('Shanghai') || timezone.includes('Beijing') || 
-            timezone.includes('Phnom_Penh') || timezone.includes('Asia/Shanghai')) {
-          return 'china';
+        try {
+          // 2. 備用：檢查瀏覽器語言（僅限簡體中文和高棉語）
+          const language = navigator.language || navigator.userLanguage;
+          console.log('檢測到的語言:', language);
+          
+          // 只有簡體中文(zh-CN)或高棉語才判斷為china
+          if (language === 'zh-CN' || language.includes('km')) {
+            return 'china';
+          }
+        } catch (error) {
+          console.log('語言檢測失敗:', error);
+        }
+
+        try {
+          // 3. 備用：檢查時區
+          const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          console.log('檢測到的時區:', timezone);
+          
+          if (timezone.includes('Shanghai') || timezone.includes('Beijing') || 
+              timezone.includes('Phnom_Penh')) {
+            return 'china';
+          }
+        } catch (error) {
+          console.log('時區檢測失敗:', error);
         }
 
         // 4. 默認為其他地區
+        console.log('所有檢測方法都無法確定，默認為其他地區');
         return 'other';
       }
 
